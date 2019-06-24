@@ -2,6 +2,9 @@ package com.khtm.eureka.api;
 
 public interface EurekaApi {
 
+    public static String STATUS_UP = "UP";
+    public static String STATUS_DOWN = "DOWN";
+
     void registerServiceInEurekaService(
             String applicationName,
             int portNumber,

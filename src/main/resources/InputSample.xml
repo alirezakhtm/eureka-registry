@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<applications>
+    <versions__delta>1</versions__delta>
+    <apps__hashcode>UP_7_</apps__hashcode>
+    <application>
+        <name>LENDINGSERVICE</name>
+        <instance>
+            <instanceId>fea781b10c07:lendingservice:9663</instanceId>
+            <hostName>172.18.0.3</hostName>
+            <app>LENDINGSERVICE</app>
+            <ipAddr>172.18.0.3</ipAddr>
+            <status>UP</status>
+            <overriddenstatus>UNKNOWN</overriddenstatus>
+            <port enabled="true">9663</port>
+            <securePort enabled="false">443</securePort>
+            <countryId>1</countryId>
+            <dataCenterInfo class="com.netflix.appinfo.InstanceInfo$DefaultDataCenterInfo">
+                <name>MyOwn</name>
+            </dataCenterInfo>
+            <leaseInfo>
+                <renewalIntervalInSecs>30</renewalIntervalInSecs>
+                <durationInSecs>90</durationInSecs>
+                <registrationTimestamp>1561024393587</registrationTimestamp>
+                <lastRenewalTimestamp>1561380791116</lastRenewalTimestamp>
+                <evictionTimestamp>0</evictionTimestamp>
+                <serviceUpTimestamp>1561024393066</serviceUpTimestamp>
+            </leaseInfo>
+            <metadata>
+                <management.port>9663</management.port>
+            </metadata>
+            <homePageUrl>http://172.18.0.3:9663/</homePageUrl>
+            <statusPageUrl>http://172.18.0.3:9663/actuator/info</statusPageUrl>
+            <healthCheckUrl>http://172.18.0.3:9663/actuator/health</healthCheckUrl>
+            <vipAddress>lendingservice</vipAddress>
+            <secureVipAddress>lendingservice</secureVipAddress>
+            <isCoordinatingDiscoveryServer>false</isCoordinatingDiscoveryServer>
+            <lastUpdatedTimestamp>1561024393588</lastUpdatedTimestamp>
+            <lastDirtyTimestamp>1561024392750</lastDirtyTimestamp>
+            <actionType>ADDED</actionType>
+        </instance>
+    </application>
+    <application>
+        <name>UISERVER</name>
+        <instance>
+            <instanceId>e200a4a44fee:uiserver:8585</instanceId>
+            <hostName>172.18.0.4</hostName>
+            <app>UISERVER</app>
+            <ipAddr>172.18.0.4</ipAddr>
+            <status>UP</status>
+            <overriddenstatus>UNKNOWN</overriddenstatus>
+            <port enabled="true">8585</port>
+            <securePort enabled="false">443</securePort>
+            <countryId>1</countryId>
+            <dataCenterInfo class="com.netflix.appinfo.InstanceInfo$DefaultDataCenterInfo">
+                <name>MyOwn</name>
+            </dataCenterInfo>
+            <leaseInfo>
+                <renewalIntervalInSecs>30</renewalIntervalInSecs>
+                <durationInSecs>90</durationInSecs>
+                <registrationTimestamp>1561024387695</registrationTimestamp>
+                <lastRenewalTimestamp>1561380785573</lastRenewalTimestamp>
+                <evictionTimestamp>0</evictionTimestamp>
+                <serviceUpTimestamp>1561024387173</serviceUpTimestamp>
+            </leaseInfo>
+            <metadata>
+                <management.port>8585</management.port>
+            </metadata>
+            <homePageUrl>http://172.18.0.4:8585/</homePageUrl>
+            <statusPageUrl>http://172.18.0.4:8585/actuator/info</statusPageUrl>
+            <healthCheckUrl>http://172.18.0.4:8585/actuator/health</healthCheckUrl>
+            <vipAddress>uiserver</vipAddress>
+            <secureVipAddress>uiserver</secureVipAddress>
+            <isCoordinatingDiscoveryServer>false</isCoordinatingDiscoveryServer>
+            <lastUpdatedTimestamp>1561024387695</lastUpdatedTimestamp>
+            <lastDirtyTimestamp>1561024386932</lastDirtyTimestamp>
+            <actionType>ADDED</actionType>
+        </instance>
+    </application>
+    <application>
+        <name>TREASUARYSERVICE</name>
+        <instance>
+            <instanceId>32bd72ea7ac1:treasuaryservice:9885</instanceId>
+            <hostName>172.18.0.5</hostName>
+            <app>TREASUARYSERVICE</app>
+            <ipAddr>172.18.0.5</ipAddr>
+            <status>UP</status>
+            <overriddenstatus>UNKNOWN</overriddenstatus>
+            <port enabled="true">9885</port>
+            <securePort enabled="false">443</securePort>
+            <countryId>1</countryId>
+            <dataCenterInfo class="com.netflix.appinfo.InstanceInfo$DefaultDataCenterInfo">
+                <name>MyOwn</name>
+            </dataCenterInfo>
+            <leaseInfo>
+                <renewalIntervalInSecs>30</renewalIntervalInSecs>
+                <durationInSecs>90</durationInSecs>
+                <registrationTimestamp>1561024394674</registrationTimestamp>
+                <lastRenewalTimestamp>1561380791116</lastRenewalTimestamp>
+                <evictionTimestamp>0</evictionTimestamp>
+                <serviceUpTimestamp>1561024394159</serviceUpTimestamp>
+            </leaseInfo>
+            <metadata>
+                <management.port>9885</management.port>
+            </metadata>
+            <homePageUrl>http://172.18.0.5:9885/</homePageUrl>
+            <statusPageUrl>http://172.18.0.5:9885/actuator/info</statusPageUrl>
+            <healthCheckUrl>http://172.18.0.5:9885/actuator/health</healthCheckUrl>
+            <vipAddress>treasuaryservice</vipAddress>
+            <secureVipAddress>treasuaryservice</secureVipAddress>
+            <isCoordinatingDiscoveryServer>false</isCoordinatingDiscoveryServer>
+            <lastUpdatedTimestamp>1561024394674</lastUpdatedTimestamp>
+            <lastDirtyTimestamp>1561024394021</lastDirtyTimestamp>
+            <actionType>ADDED</actionType>
+        </instance>
+    </application>
+    <application>
+        <name>CIFSERVICE</name>
+        <instance>
+            <instanceId>81fcf3ba497a:cifservice:9653</instanceId>
+            <hostName>172.18.0.6</hostName>
+            <app>CIFSERVICE</app>
+            <ipAddr>172.18.0.6</ipAddr>
+            <status>UP</status>
+            <overriddenstatus>UP</overriddenstatus>
+            <port enabled="true">9653</port>
+            <securePort enabled="false">443</securePort>
+            <countryId>1</countryId>
+            <dataCenterInfo class="com.netflix.appinfo.InstanceInfo$DefaultDataCenterInfo">
+                <name>MyOwn</name>
+            </dataCenterInfo>
+            <leaseInfo>
+                <renewalIntervalInSecs>30</renewalIntervalInSecs>
+                <durationInSecs>90</durationInSecs>
+                <registrationTimestamp>1561024394675</registrationTimestamp>
+                <lastRenewalTimestamp>1561380791116</lastRenewalTimestamp>
+                <evictionTimestamp>0</evictionTimestamp>
+                <serviceUpTimestamp>1561024394374</serviceUpTimestamp>
+            </leaseInfo>
+            <metadata>
+                <management.port>9653</management.port>
+            </metadata>
+            <homePageUrl>http://172.18.0.6:9653/</homePageUrl>
+            <statusPageUrl>http://172.18.0.6:9653/actuator/info</statusPageUrl>
+            <healthCheckUrl>http://172.18.0.6:9653/actuator/health</healthCheckUrl>
+            <vipAddress>cifservice</vipAddress>
+            <secureVipAddress>cifservice</secureVipAddress>
+            <isCoordinatingDiscoveryServer>false</isCoordinatingDiscoveryServer>
+            <lastUpdatedTimestamp>1561278033573</lastUpdatedTimestamp>
+            <lastDirtyTimestamp>1561024394292</lastDirtyTimestamp>
+            <actionType>MODIFIED</actionType>
+        </instance>
+    </application>
+    <application>
+        <name>CONFIG-SERVER</name>
+        <instance>
+            <instanceId>a7d816d36c5d:config-server:9000</instanceId>
+            <hostName>a7d816d36c5d</hostName>
+            <app>CONFIG-SERVER</app>
+            <ipAddr>172.18.0.2</ipAddr>
+            <status>UP</status>
+            <overriddenstatus>UNKNOWN</overriddenstatus>
+            <port enabled="true">9000</port>
+            <securePort enabled="false">443</securePort>
+            <countryId>1</countryId>
+            <dataCenterInfo class="com.netflix.appinfo.InstanceInfo$DefaultDataCenterInfo">
+                <name>MyOwn</name>
+            </dataCenterInfo>
+            <leaseInfo>
+                <renewalIntervalInSecs>30</renewalIntervalInSecs>
+                <durationInSecs>90</durationInSecs>
+                <registrationTimestamp>1561024345645</registrationTimestamp>
+                <lastRenewalTimestamp>1561380803019</lastRenewalTimestamp>
+                <evictionTimestamp>0</evictionTimestamp>
+                <serviceUpTimestamp>1561024344983</serviceUpTimestamp>
+            </leaseInfo>
+            <metadata>
+                <management.port>9000</management.port>
+            </metadata>
+            <homePageUrl>http://a7d816d36c5d:9000/</homePageUrl>
+            <statusPageUrl>http://a7d816d36c5d:9000/actuator/info</statusPageUrl>
+            <healthCheckUrl>http://a7d816d36c5d:9000/actuator/health</healthCheckUrl>
+            <vipAddress>config-server</vipAddress>
+            <secureVipAddress>config-server</secureVipAddress>
+            <isCoordinatingDiscoveryServer>false</isCoordinatingDiscoveryServer>
+            <lastUpdatedTimestamp>1561024345645</lastUpdatedTimestamp>
+            <lastDirtyTimestamp>1561024344818</lastDirtyTimestamp>
+            <actionType>ADDED</actionType>
+        </instance>
+    </application>
+    <application>
+        <name>FOO-APP</name>
+        <instance>
+            <instanceId>01jk56g89gdff:foo-app:8585</instanceId>
+            <hostName>10.12.47.125</hostName>
+            <app>FOO-APP</app>
+            <ipAddr>10.12.47.125</ipAddr>
+            <status>UP</status>
+            <overriddenstatus>UNKNOWN</overriddenstatus>
+            <port enabled="true">8585</port>
+            <securePort enabled="false">443</securePort>
+            <countryId>1</countryId>
+            <dataCenterInfo class="com.netflix.appinfo.InstanceInfo$DefaultDataCenterInfo">
+                <name>MyOwn</name>
+            </dataCenterInfo>
+            <leaseInfo>
+                <renewalIntervalInSecs>30</renewalIntervalInSecs>
+                <durationInSecs>90</durationInSecs>
+                <registrationTimestamp>1561283559575</registrationTimestamp>
+                <lastRenewalTimestamp>1561283559575</lastRenewalTimestamp>
+                <evictionTimestamp>0</evictionTimestamp>
+                <serviceUpTimestamp>1561203122434</serviceUpTimestamp>
+            </leaseInfo>
+            <metadata class="java.util.Collections$EmptyMap"/>
+            <homePageUrl>http://localhost</homePageUrl>
+            <statusPageUrl>http://localhost/actuator/info</statusPageUrl>
+            <healthCheckUrl>http://localhost/actuator/health</healthCheckUrl>
+            <vipAddress>foo-app</vipAddress>
+            <secureVipAddress>foo-app</secureVipAddress>
+            <isCoordinatingDiscoveryServer>false</isCoordinatingDiscoveryServer>
+            <lastUpdatedTimestamp>1561283559575</lastUpdatedTimestamp>
+            <lastDirtyTimestamp>1561283559070</lastDirtyTimestamp>
+            <actionType>ADDED</actionType>
+        </instance>
+    </application>
+    <application>
+        <name>GATEWAY-SERVER</name>
+        <instance>
+            <instanceId>0ae135054e2b:gateway-server:8595</instanceId>
+            <hostName>172.18.0.7</hostName>
+            <app>GATEWAY-SERVER</app>
+            <ipAddr>172.18.0.7</ipAddr>
+            <status>UP</status>
+            <overriddenstatus>UNKNOWN</overriddenstatus>
+            <port enabled="true">8595</port>
+            <securePort enabled="false">443</securePort>
+            <countryId>1</countryId>
+            <dataCenterInfo class="com.netflix.appinfo.InstanceInfo$DefaultDataCenterInfo">
+                <name>MyOwn</name>
+            </dataCenterInfo>
+            <leaseInfo>
+                <renewalIntervalInSecs>30</renewalIntervalInSecs>
+                <durationInSecs>90</durationInSecs>
+                <registrationTimestamp>1561024388509</registrationTimestamp>
+                <lastRenewalTimestamp>1561380785573</lastRenewalTimestamp>
+                <evictionTimestamp>0</evictionTimestamp>
+                <serviceUpTimestamp>1561024387993</serviceUpTimestamp>
+            </leaseInfo>
+            <metadata>
+                <management.port>8595</management.port>
+            </metadata>
+            <homePageUrl>http://172.18.0.7:8595/</homePageUrl>
+            <statusPageUrl>http://172.18.0.7:8595/actuator/info</statusPageUrl>
+            <healthCheckUrl>http://172.18.0.7:8595/actuator/health</healthCheckUrl>
+            <vipAddress>gateway-server</vipAddress>
+            <secureVipAddress>gateway-server</secureVipAddress>
+            <isCoordinatingDiscoveryServer>false</isCoordinatingDiscoveryServer>
+            <lastUpdatedTimestamp>1561024388509</lastUpdatedTimestamp>
+            <lastDirtyTimestamp>1561024387546</lastDirtyTimestamp>
+            <actionType>ADDED</actionType>
+        </instance>
+    </application>
+</applications>
