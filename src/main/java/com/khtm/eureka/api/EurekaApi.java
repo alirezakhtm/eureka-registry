@@ -1,9 +1,15 @@
 package com.khtm.eureka.api;
 
+import com.khtm.eureka.model.Application;
+import com.khtm.eureka.model.Root;
+
+import java.io.IOException;
+import java.net.SocketException;
+
 public interface EurekaApi {
 
-    public static String STATUS_UP = "UP";
-    public static String STATUS_DOWN = "DOWN";
+    static String STATUS_UP = "UP";
+    static String STATUS_DOWN = "DOWN";
 
     void registerServiceInEurekaService(
             String applicationName,
@@ -12,12 +18,12 @@ public interface EurekaApi {
             String healthCheckUrl,
             String statusPageUrl,
             String homePageUrl
-    );
+    ) throws SocketException;
 
-    boolean changeStatus(String instanceId, String applicationName, String status);
+    boolean changeStatus(String instanceId, String applicationName, String status) throws IOException;
 
-    String getServiceInfo(String applicationName);
+    Application getServiceInfo(String applicationName) throws IOException;
 
-    String getAllServicesInfo();
+    Root getAllServicesInfo() throws IOException;
 
 }
