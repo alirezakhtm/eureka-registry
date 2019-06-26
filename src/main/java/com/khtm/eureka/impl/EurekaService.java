@@ -12,6 +12,7 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 
+import javax.xml.bind.JAXBException;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -146,7 +147,7 @@ public class EurekaService implements EurekaApi {
     /**
      * @return all information about all services which registered in Eureka server.
      * */
-    public Root getAllServicesInfo() throws IOException {
+    public Root getAllServicesInfo() throws IOException, JAXBException {
         String url = String.format("http://%s:%d/eureka/apps/", this.eurekaUrl, this.eurekaPortNum);
         com.khtm.eureka.model.HttpResponse httpResponse = this.sendGetRequest(url, null);
         XmlParse xmlParse = new XmlParse();

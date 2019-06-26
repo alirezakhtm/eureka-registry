@@ -4,6 +4,7 @@ import com.khtm.eureka.model.Application;
 import com.khtm.eureka.model.HttpResponse;
 import com.khtm.eureka.model.Root;
 
+import javax.xml.bind.JAXBException;
 import java.io.IOException;
 
 public interface EurekaApi {
@@ -23,6 +24,6 @@ public interface EurekaApi {
 
     Application getServiceInfo(String applicationName) throws IOException;
 
-    Root getAllServicesInfo() throws IOException;
+    Root getAllServicesInfo() throws IOException, JAXBException;
 
 }

@@ -7,6 +7,7 @@ import com.khtm.eureka.model.Root;
 import org.junit.Assert;
 import org.junit.Test;
 
+import javax.xml.bind.JAXBException;
 import java.io.IOException;
 
 public class EurekaAPI {
@@ -30,7 +31,7 @@ public class EurekaAPI {
     }
 
     @Test
-    public void getAllServicesInformation() throws IOException {
+    public void getAllServicesInformation() throws IOException, JAXBException {
         Root root = eurekaService.getAllServicesInfo();
         Assert.assertEquals("1", root.getVersions__delta());
     }
