@@ -6,6 +6,7 @@ import com.khtm.eureka.model.Root;
 
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
+import java.util.List;
 
 public interface EurekaApi {
 
@@ -22,7 +23,7 @@ public interface EurekaApi {
 
     boolean changeStatus(String instanceId, String applicationName, String status) throws IOException;
 
-    Application getServiceInfo(String applicationName) throws IOException;
+    List<Application> getServiceInfo(String applicationName) throws IOException, JAXBException;
 
     Root getAllServicesInfo() throws IOException, JAXBException;
 

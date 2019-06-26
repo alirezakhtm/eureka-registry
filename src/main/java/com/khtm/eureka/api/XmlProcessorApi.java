@@ -9,6 +9,7 @@ import java.util.List;
 public interface XmlProcessorApi {
 
     Root analysisGetAllServiceInfo(String response) throws JAXBException;
-    Application analysisGetApplicationInfo(String response);
+    Application analysisGetApplicationInfo(String response) throws JAXBException;
+    List<Application> analysisAllSessionsOfService(String response) throws JAXBException;
 
 }

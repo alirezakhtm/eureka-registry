@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.DatagramSocket;
 import java.net.SocketException;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -137,11 +138,11 @@ public class EurekaService implements EurekaApi {
      * @param applicationName
      * @return all information about application
      * */
-    public Application getServiceInfo(String applicationName) throws IOException{
+    public List<Application> getServiceInfo(String applicationName) throws IOException, JAXBException {
         String url = String.format("http://%s:%d/eureka/apps/%s", this.eurekaUrl, applicationName);
         com.khtm.eureka.model.HttpResponse httpResponse = this.sendGetRequest(url, null);
         XmlParse xmlParse = new XmlParse();
-        return xmlParse.analysisGetApplicationInfo(httpResponse.getResult());
+        return xmlParse.analysisAllSessionsOfService(httpResponse.getResult());
     }
 
     /**
