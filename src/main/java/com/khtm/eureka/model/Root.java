@@ -9,7 +9,7 @@ public class Root {
 
     private String versions__delta;
     private String apps__hashcode;
-    private List<Application> applications;
+    private Application application;
 
     @XmlElement(name = "versions__delta")
     public String getVersions__delta() {
@@ -30,11 +30,11 @@ public class Root {
     }
 
     @XmlElement(name = "application")
-    public List<Application> getApplications() {
-        return applications;
+    public Application getApplication() {
+        return application;
     }
 
-    public void setApplications(List<Application> applications) {
-        this.applications = applications;
+    public void setApplication(Application applications) {
+        this.application = applications;
     }
 }

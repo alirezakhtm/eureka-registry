@@ -2,9 +2,10 @@ package com.khtm.eureka.impl;
 
 import com.khtm.eureka.api.EurekaApi;
 import com.khtm.eureka.model.Application;
+import com.khtm.eureka.model.Instance;
 import com.khtm.eureka.model.Root;
-import com.sun.istack.internal.NotNull;
 import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
@@ -33,7 +34,7 @@ public class EurekaService implements EurekaApi {
     private final int eurekaPortNum;
 
     /**
-     * @param eurekaUrl like 10.12.47.125
+     * @param eurekaUrl like http://10.12.47.125
      * @param eurekaPortNum like 8761
      * */
     public EurekaService(String eurekaUrl, int eurekaPortNum) {
@@ -76,7 +77,7 @@ public class EurekaService implements EurekaApi {
         String requestBody = String.format(
                 requestThemplate,
                 /*Instance ID*/
-                String.format("%s:%s:%d", this.createCrazyString(20), applicationName, portNumber),
+                String.format("%s:%s:%d", this.createCrazyString(10), applicationName, portNumber),
                 /*hostName*/
                 this.getCurrentIP(),
                 /*App Name*/
@@ -99,7 +100,7 @@ public class EurekaService implements EurekaApi {
                 String.format("http://%s:%d%s", this.getCurrentIP(), portNumber, homePageUrl)
                 );
 
-        String url = String.format("http://%s:%d/eureka/apps/%s",
+        String url = String.format("%s:%d/eureka/apps/%s",
                 this.eurekaUrl, this.eurekaPortNum, applicationName.toUpperCase());
 
         StringEntity requestEntity = new StringEntity(requestBody, "application/json", "UTF-8");
@@ -122,6 +123,12 @@ public class EurekaService implements EurekaApi {
 
     }
 
+    @Override
+    public com.khtm.eureka.model.HttpResponse unregisterServiceFromEurekaService(String applicationName, String instanceId) throws IOException {
+        String url = String.format("%s:%d/eureka/apps/%s/%s", this.eurekaUrl, this.eurekaPortNum, applicationName, instanceId);
+        return this.sendDeleteRequest(url, null);
+    }
+
     /**
      * @param instanceId
      * @param applicationName
@@ -129,7 +136,7 @@ public class EurekaService implements EurekaApi {
      * @return true if response code is equal to 200
      * */
     public boolean changeStatus(String instanceId, String applicationName, String status) throws IOException {
-        String url = String.format("http://%s:%d/eureka/apps/%s/%s/status?value=%s",
+        String url = String.format("%s:%d/eureka/apps/%s/%s/status?value=%s",
                 this.eurekaUrl, this.eurekaPortNum, applicationName.toUpperCase(), instanceId, status);
         return this.sendPutRequest(url, null).getResponseCode() == 200;
     }
@@ -138,8 +145,8 @@ public class EurekaService implements EurekaApi {
      * @param applicationName
      * @return all information about application
      * */
-    public List<Application> getServiceInfo(String applicationName) throws IOException, JAXBException {
-        String url = String.format("http://%s:%d/eureka/apps/%s", this.eurekaUrl, this.eurekaPortNum,applicationName);
+    public List<Instance> getServiceInfo(String applicationName) throws IOException, JAXBException {
+        String url = String.format("%s:%d/eureka/apps/%s", this.eurekaUrl, this.eurekaPortNum,applicationName);
         com.khtm.eureka.model.HttpResponse httpResponse = this.sendGetRequest(url, null);
         XmlParse xmlParse = new XmlParse();
         return xmlParse.analysisAllSessionsOfService(httpResponse.getResult());
@@ -149,7 +156,7 @@ public class EurekaService implements EurekaApi {
      * @return all information about all services which registered in Eureka server.
      * */
     public Root getAllServicesInfo() throws IOException, JAXBException {
-        String url = String.format("http://%s:%d/eureka/apps/", this.eurekaUrl, this.eurekaPortNum);
+        String url = String.format("%s:%d/eureka/apps/", this.eurekaUrl, this.eurekaPortNum);
         com.khtm.eureka.model.HttpResponse httpResponse = this.sendGetRequest(url, null);
         XmlParse xmlParse = new XmlParse();
         return xmlParse.analysisGetAllServiceInfo(httpResponse.getResult());
@@ -223,7 +230,59 @@ public class EurekaService implements EurekaApi {
         }
     }
 
-    private String addRequestParameterToUrl(String url, @NotNull Map<String, String> parameters){
+    private com.khtm.eureka.model.HttpResponse sendDeleteRequest(
+            String url, Map<String, String> parameters) throws IOException {
+        HttpDelete request = null;
+        // create http client
+        CloseableHttpClient client = HttpClientBuilder.create().build();
+        if(parameters != null) {
+            // create url request
+            String strRequest = addRequestParameterToUrl(url, parameters);
+            request = new HttpDelete(strRequest);
+        }else {
+            request = new HttpDelete(url);
+        }
+        request.addHeader("User-Agent", USER_AGENT);
+        // receive http response
+        assert client != null;
+        HttpResponse response = client.execute(request);
+        int responseCode = response.getStatusLine().getStatusCode();
+        if(response.getEntity() != null) {
+            BufferedReader bfr = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+            StringBuffer sb = new StringBuffer();
+            String line = "";
+            while ((line = bfr.readLine()) != null) sb.append(line);
+            // close client
+            client.close();
+            // return result to
+            return com.khtm.eureka.model.HttpResponse.builder().responseCode(responseCode).result(sb.toString()).build();
+        }else{
+            // close client
+            client.close();
+            // return result to
+            return com.khtm.eureka.model.HttpResponse.builder().responseCode(responseCode).result(null).build();
+        }
+    }
+
+    private com.khtm.eureka.model.HttpResponse getHttpResponse(CloseableHttpClient client, HttpResponse response, int responseCode) throws IOException {
+        if(response.getEntity() != null) {
+            BufferedReader bfr = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+            StringBuffer sb = new StringBuffer();
+            String line = "";
+            while ((line = bfr.readLine()) != null) sb.append(line);
+            // close client
+            client.close();
+            // return result to
+            return com.khtm.eureka.model.HttpResponse.builder().responseCode(responseCode).result(sb.toString()).build();
+        }else{
+            // close client
+            client.close();
+            // return result to
+            return com.khtm.eureka.model.HttpResponse.builder().responseCode(responseCode).result(null).build();
+        }
+    }
+
+    private String addRequestParameterToUrl(String url, Map<String, String> parameters){
         String strRequest = url + "?";
         for(String key : parameters.keySet()){
             strRequest += String.format("%s=%s&", key, parameters.get(key));

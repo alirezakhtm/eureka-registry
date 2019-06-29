@@ -2,6 +2,7 @@ package com.khtm.eureka.api;
 
 import com.khtm.eureka.model.Application;
 import com.khtm.eureka.model.HttpResponse;
+import com.khtm.eureka.model.Instance;
 import com.khtm.eureka.model.Root;
 
 import javax.xml.bind.JAXBException;
@@ -21,9 +22,11 @@ public interface EurekaApi {
             String homePageUrl
     ) throws IOException;
 
+    HttpResponse unregisterServiceFromEurekaService(String applicationName, String instanceId) throws IOException;
+
     boolean changeStatus(String instanceId, String applicationName, String status) throws IOException;
 
-    List<Application> getServiceInfo(String applicationName) throws IOException, JAXBException;
+    List<Instance> getServiceInfo(String applicationName) throws IOException, JAXBException;
 
     Root getAllServicesInfo() throws IOException, JAXBException;
 

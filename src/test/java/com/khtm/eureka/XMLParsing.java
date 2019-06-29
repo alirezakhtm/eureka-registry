@@ -17,7 +17,7 @@ public class XMLParsing{
         JAXBContext context = JAXBContext.newInstance(Root.class);
         Unmarshaller unmarshaller = context.createUnmarshaller();
         Root root = (Root) unmarshaller.unmarshal(file);
-        System.out.println(String.format("Number of Services is: %d", root.getApplications().size()));
+        System.out.println(String.format("Number of Services is: %d", root.getApplication().getInstance().size()));
         Assert.assertNotNull(root);
     }
 

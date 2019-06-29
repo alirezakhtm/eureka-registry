@@ -2,12 +2,13 @@ package com.khtm.eureka.model;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.List;
 
 @XmlRootElement(name = "application")
 public class Application {
 
     private String name;
-    private Instance instance;
+    private List<Instance> instance;
 
     @XmlElement(name = "name")
     public String getName() {
@@ -19,11 +20,11 @@ public class Application {
     }
 
     @XmlElement(name = "instance")
-    public Instance getInstance() {
+    public List<Instance> getInstance() {
         return instance;
     }
 
-    public void setInstance(Instance instance) {
+    public void setInstance(List<Instance> instance) {
         this.instance = instance;
     }
 }
