@@ -139,7 +139,7 @@ public class EurekaService implements EurekaApi {
      * @return all information about application
      * */
     public List<Application> getServiceInfo(String applicationName) throws IOException, JAXBException {
-        String url = String.format("http://%s:%d/eureka/apps/%s", this.eurekaUrl, applicationName);
+        String url = String.format("http://%s:%d/eureka/apps/%s", this.eurekaUrl, this.eurekaPortNum,applicationName);
         com.khtm.eureka.model.HttpResponse httpResponse = this.sendGetRequest(url, null);
         XmlParse xmlParse = new XmlParse();
         return xmlParse.analysisAllSessionsOfService(httpResponse.getResult());

@@ -28,6 +28,7 @@ public class XmlParse implements XmlProcessorApi {
 
     @Override
     public List<Application> analysisAllSessionsOfService(String response) throws JAXBException {
+        response = "<root> " + response + " </root>";
         JAXBContext context = JAXBContext.newInstance(Applications.class);
         Unmarshaller unmarshaller = context.createUnmarshaller();
         return ((Applications) unmarshaller.unmarshal(new ByteArrayInputStream(response.getBytes()))).getApplications();
