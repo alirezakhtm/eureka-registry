@@ -1,10 +1,13 @@
 package com.khtm.eureka.model;
 
+import lombok.ToString;
+
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 
 @XmlRootElement(name = "application")
+@ToString
 public class Application {
 
     private String name;

@@ -1,15 +1,15 @@
 package com.khtm.eureka;
 
-import com.khtm.eureka.api.EurekaApi;
 import com.khtm.eureka.impl.EurekaService;
-import com.khtm.eureka.model.Application;
 import com.khtm.eureka.model.HttpResponse;
 import com.khtm.eureka.model.Instance;
 import com.khtm.eureka.model.Root;
 import org.junit.*;
 import org.junit.runners.MethodSorters;
+import org.xml.sax.SAXException;
 
 import javax.xml.bind.JAXBException;
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +23,7 @@ public class EurekaAPI {
     private static List<Instance> instances = new ArrayList<>();
 
     @BeforeClass
-    public static void RegisterServicesOnEurekaServer() throws IOException, JAXBException, InterruptedException {
+    public static void RegisterServicesOnEurekaServer() throws IOException, JAXBException, InterruptedException, ParserConfigurationException, SAXException {
         System.out.println(String.format("%s - start test %s", TAG, "RegisterServicesOnEurekaServer"));
         HttpResponse responseFirstInstance = eurekaService.registerServiceInEurekaService("foo-application",
                 6666, "/health", "/status", "/homepage");
@@ -31,7 +31,6 @@ public class EurekaAPI {
         HttpResponse responseSecondInstance = eurekaService.registerServiceInEurekaService("foo-application",
                 8888, "/health", "/status", "/homepage");
         System.out.println(String.format("[**] HttpResponse -> %s", responseSecondInstance.toString()));
-        Thread.sleep(5000);
         List<Instance> allInstance = eurekaService.getServiceInfo("foo-application");
         allInstance.forEach(instance -> {
             System.out.println(String.format("[*] Service %s - with id %s found", instance.getApp(), instance.getInstanceId()));
@@ -50,11 +49,13 @@ public class EurekaAPI {
 //    }
 
     @Test
-    public void getAllServicesInformation() throws IOException, JAXBException {
+    public void getAllServicesInformation() throws IOException, JAXBException, ParserConfigurationException, SAXException {
         System.out.println(String.format("%s - start test %s", TAG, "getAllServicesInformation"));
         Root root = eurekaService.getAllServicesInfo();
-        root.getApplication().getInstance().forEach(instance -> {
-            System.out.println(String.format("[*] Service %s :::: %s detected.", instance.getApp(), instance.getInstanceId()));
+        root.getApplications().forEach(application -> {
+            application.getInstance().forEach(instance -> {
+                System.out.println(String.format("[*] Service %s :::: %s detected.", instance.getApp(), instance.getInstanceId()));
+            });
         });
         Assert.assertEquals("1", root.getVersions__delta());
     }

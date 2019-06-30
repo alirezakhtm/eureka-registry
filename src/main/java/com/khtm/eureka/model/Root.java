@@ -1,6 +1,7 @@
 package com.khtm.eureka.model;
 
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 
@@ -9,7 +10,7 @@ public class Root {
 
     private String versions__delta;
     private String apps__hashcode;
-    private Application application;
+    private List<Application> applications;
 
     @XmlElement(name = "versions__delta")
     public String getVersions__delta() {
@@ -30,11 +31,11 @@ public class Root {
     }
 
     @XmlElement(name = "application")
-    public Application getApplication() {
-        return application;
+    public List<Application> getApplications() {
+        return applications;
     }
 
-    public void setApplication(Application applications) {
-        this.application = applications;
+    public void setApplication(List<Application> applications) {
+        this.applications = applications;
     }
 }

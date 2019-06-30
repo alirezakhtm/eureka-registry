@@ -1,7 +1,10 @@
 package com.khtm.eureka.model;
 
+import lombok.ToString;
+
 import javax.xml.bind.annotation.XmlElement;
 
+@ToString
 public class Instance {
 
     private String instanceId;
