@@ -34,6 +34,14 @@ public class EurekaService implements EurekaApi {
 
     private final String eurekaUrl;
     private final int eurekaPortNum;
+    private final String ipv4;
+
+    private static String instanceId;
+    private static String applicationName;
+    private static String healthCheckUrl;
+    private static int applicationPortNumber;
+
+    private static Thread threadHealthCheck;
 
     private static final String REQUEST_METHOD_GET = "GET";
     private static final String REQUEST_METHOD_PUT = "PUT";
@@ -45,9 +53,37 @@ public class EurekaService implements EurekaApi {
      * @param eurekaUrl like http://10.12.47.125
      * @param eurekaPortNum like 8761
      * */
-    public EurekaService(String eurekaUrl, int eurekaPortNum) {
+    public EurekaService(String eurekaUrl, int eurekaPortNum, String ipv4) {
         this.eurekaPortNum = eurekaPortNum;
         this.eurekaUrl = eurekaUrl;
+        this.ipv4 = ipv4;
+        threadHealthCheck = new Thread(() -> {
+            while (true) {
+                try {
+                    Thread.sleep(3000);
+                    //System.out.println(">>>> Thread is running ...");
+                    String url = String.format("http://%s:%d%s", getCurrentIP(), applicationPortNumber, healthCheckUrl);
+                    com.khtm.eureka.model.HttpResponse httpResponse = sendRequest(url,
+                            null, REQUEST_METHOD_GET);
+                    if (httpResponse.getResponseCode() != 200) {
+                        unregisterThisService();
+                    }
+                } catch (IOException e) {
+                    try {
+                        unregisterThisService();
+                        break;
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                        break;
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                    break;
+                }
+            }
+        });
+        EurekaService.threadHealthCheck.setDaemon(true);
+        EurekaService.threadHealthCheck.start();
     }
 
     /**
@@ -82,7 +118,10 @@ public class EurekaService implements EurekaApi {
                 "\t}\n" +
                 "}";
 
-        String instanceId = String.format("%s:%s:%d", this.createCrazyString(10), applicationName, portNumber);
+        instanceId = String.format("%s:%s:%d", this.createCrazyString(10), applicationName, portNumber);
+        EurekaService.applicationName = applicationName;
+        EurekaService.healthCheckUrl = healthCheckUrl;
+        EurekaService.applicationPortNumber = portNumber;
 
         String requestBody = String.format(
                 requestThemplate,
@@ -125,11 +164,11 @@ public class EurekaService implements EurekaApi {
             BufferedReader bfr = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
             client.close();
             while ((line = bfr.readLine()) != null) sb.append(line);
-            this.healthCheckOtherServices(instanceId);
+            //this.healthCheckOtherServices(instanceId);
             return com.khtm.eureka.model.HttpResponse.builder().responseCode(responseCodeNum).result(sb.toString()).build();
         }else{
             client.close();
-            this.healthCheckOtherServices(instanceId);
+            //this.healthCheckOtherServices(instanceId);
             return com.khtm.eureka.model.HttpResponse.builder().responseCode(responseCodeNum).result(null).build();
         }
     }
@@ -173,6 +212,11 @@ public class EurekaService implements EurekaApi {
         return xmlParse.analysisGetAllServiceInfo(httpResponse.getResult());
     }
 
+    @Override
+    public void unregisterThisService() throws IOException {
+        this.unregisterServiceFromEurekaService(EurekaService.applicationName, instanceId);
+    }
+
     private String addRequestParameterToUrl(String url, Map<String, String> parameters){
         String strRequest = url + "?";
         for(String key : parameters.keySet()){
@@ -194,11 +238,12 @@ public class EurekaService implements EurekaApi {
     }
 
     private String getCurrentIP() throws SocketException {
-        String IP = null;
+        /*String IP = null;
         try(DatagramSocket socket = new DatagramSocket()){
             IP = socket.getLocalAddress().getHostAddress();
         }
-        return IP;
+        return IP;*/
+        return this.ipv4;
     }
 
     private com.khtm.eureka.model.HttpResponse sendRequest(

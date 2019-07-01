@@ -1,6 +1,7 @@
 package com.khtm.example.springexample;
 
 import com.khtm.eureka.impl.EurekaService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -34,9 +35,17 @@ public class ApplicationConfig {
     @Value("${com.khtm.application.homepageurl}")
     String homePageURL;
 
+    @Value("${com.khtm.application.ipv4}")
+    String ipv4Address;
+
+    @Bean(destroyMethod = "unregisterThisService")
+    public EurekaService getEurekaService(){
+        return new EurekaService(eurekaServerUrl, Integer.parseInt(eurekaServerPort), ipv4Address);
+    }
+
     @Bean
     public void registerApplication() throws IOException, JAXBException, ParserConfigurationException, SAXException {
-        EurekaService eurekaService = new EurekaService(eurekaServerUrl, Integer.parseInt(eurekaServerPort));
+        EurekaService eurekaService = getEurekaService();
         eurekaService.registerServiceInEurekaService(
                 applicationName,
                 applicationPortNum,
@@ -44,6 +53,11 @@ public class ApplicationConfig {
                 statusPageURL,
                 homePageURL
         );
+    }
+
+    @Bean
+    public void unregisterApplication(){
+
     }
 
 }

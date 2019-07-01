@@ -11,7 +11,10 @@ import org.xml.sax.SAXException;
 import javax.xml.bind.JAXBException;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
+import java.net.*;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Enumeration;
 import java.util.List;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -19,10 +22,11 @@ public class EurekaAPI {
     private static final String TAG = "EurekaAPI";
     private final static String EUREKA_SERVER_URL = "http://10.12.47.125";
     private final static int EUREKA_PORT_NUMBER = 8761;
-    private static EurekaService eurekaService = new EurekaService(EUREKA_SERVER_URL, EUREKA_PORT_NUMBER);
+    private final static String IPV4 = "10.12.46.147";
+    private static EurekaService eurekaService = new EurekaService(EUREKA_SERVER_URL, EUREKA_PORT_NUMBER, IPV4);
     private static List<Instance> instances = new ArrayList<>();
 
-    @BeforeClass
+    //@BeforeClass
     public static void RegisterServicesOnEurekaServer() throws IOException, JAXBException, InterruptedException, ParserConfigurationException, SAXException {
         System.out.println(String.format("%s - start test %s", TAG, "RegisterServicesOnEurekaServer"));
         HttpResponse responseFirstInstance = eurekaService.registerServiceInEurekaService("foo-application",
@@ -72,8 +76,8 @@ public class EurekaAPI {
         Assert.assertTrue(instances.size() > 1);
     }
 
-    @AfterClass
-    public static void unregisterAllServices(){
+    //@AfterClass
+    public static void unregisterAllServices() {
         System.out.println(String.format("%s - start test %s", TAG, "unregisterAllServices"));
         instances.forEach(instance -> {
             try {

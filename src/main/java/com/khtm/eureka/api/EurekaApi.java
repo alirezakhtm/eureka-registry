@@ -32,4 +32,6 @@ public interface EurekaApi {
 
     Root getAllServicesInfo() throws IOException, JAXBException, ParserConfigurationException, SAXException;
 
+    void unregisterThisService() throws IOException;
+
 }
