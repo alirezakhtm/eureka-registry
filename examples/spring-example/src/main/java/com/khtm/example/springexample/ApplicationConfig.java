@@ -54,10 +54,4 @@ public class ApplicationConfig {
                 homePageURL
         );
     }
-
-    @Bean
-    public void unregisterApplication(){
-
-    }
-
 }
