@@ -38,7 +38,7 @@ public class ApplicationConfig {
     @Value("${com.khtm.application.ipv4}")
     String ipv4Address;
 
-    @Bean(destroyMethod = "unregisterThisService")
+    @Bean
     public EurekaService getEurekaService(){
         return new EurekaService(eurekaServerUrl, Integer.parseInt(eurekaServerPort), ipv4Address);
     }
