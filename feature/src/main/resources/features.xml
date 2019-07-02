@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<features xmlns="http://karaf.apache.org/xmlns/features/v1.4.0" name="khtm-eureka-registry">
+
+
+    <feature name="khtm-eureka-registry-dependencies" version="1.0.0-SNAPSHOT">
+        <bundle>wrap:mvn:com.google.code.gson/gson/2.8.5</bundle>
+        <bundle>wrap:mvn:org.apache.httpcomponents/httpclient/4.5.9</bundle>
+    </feature>
+
+    <feature name="khtm-eureka-service-register" version="1.0.0-SNAPSHOT">
+        <feature version="1.0.0-SNAPSHOT">khtm-eureka-registry-dependencies</feature>
+        <bundle>mvn:com.khtm.eureka/eureka-register/1.0.0-SNAPSHOT</bundle>
+    </feature>
+
+</features>

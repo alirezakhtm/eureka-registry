@@ -61,4 +61,5 @@ public class ApplicationConfig {
 ``` 
 
 # Vision
-In next version I would like to develop this project and provide it for OSGi framework. 
+In next version I would like to develop this project and provide it for OSGi framework.
+(This feature is progressing ...) 
