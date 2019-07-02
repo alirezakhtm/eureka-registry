@@ -82,8 +82,9 @@ public class EurekaService implements EurekaApi {
                 }
             }
         });
-        EurekaService.threadHealthCheck.setDaemon(true);
-        EurekaService.threadHealthCheck.start();
+        /*EurekaService.threadHealthCheck.setDaemon(true);
+        EurekaService.threadHealthCheck.start();*/
+        Runtime.getRuntime().addShutdownHook(threadHealthCheck);
     }
 
     /**
