@@ -41,7 +41,7 @@ public class ApplicationConfig {
     @Value("${com.khtm.application.ipv4}")
     String ipv4Address;
 
-    @Bean(destroyMethod = "unregisterThisService")
+    @Bean
     public EurekaService getEurekaService(){
         return new EurekaService(eurekaServerUrl, Integer.parseInt(eurekaServerPort), ipv4Address);
     }
@@ -61,5 +61,4 @@ public class ApplicationConfig {
 ``` 
 
 # Vision
-In next version I would like to develop this project and provide it for OSGi framework.
-(This feature is progressing ...) 
+In next version I would like to develop this project and provide it for OSGi framework. 
