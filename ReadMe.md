@@ -61,7 +61,13 @@ public class ApplicationConfig {
 ``` 
 
 ## Run Example
+
+### WAR File
+Compile `example-war` and deploy it on TomCat
+
+## Spring framework
 After compiling example, run that aaccording follow command:
 ```bash
 $ java -jar spring-example-0.0.1-SNAPSHOT.jar
 ```
+

@@ -36,10 +36,10 @@ public class EurekaService implements EurekaApi {
     private final int eurekaPortNum;
     private final String ipv4;
 
-    private static String instanceId;
-    private static String applicationName;
-    private static String healthCheckUrl;
-    private static int applicationPortNumber;
+    public static String instanceId;
+    public static String applicationName;
+    public static String healthCheckUrl;
+    public static int applicationPortNumber;
 
     private static Thread threadHealthCheck;
 
