@@ -60,5 +60,8 @@ public class ApplicationConfig {
 }
 ``` 
 
-# Vision
-In next version I would like to develop this project and provide it for OSGi framework. 
+## Run Example
+After compiling example, run that aaccording follow command:
+```bash
+$ java -jar spring-example-0.0.1-SNAPSHOT.jar
+```
