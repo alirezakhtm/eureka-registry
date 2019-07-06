@@ -36,10 +36,10 @@ public class EurekaService implements EurekaApi {
     private final int eurekaPortNum;
     private final String ipv4;
 
-    public static String instanceId;
-    public static String applicationName;
-    public static String healthCheckUrl;
-    public static int applicationPortNumber;
+    public String instanceId;            // static
+    public String applicationName;       // static
+    public String healthCheckUrl;        // static
+    public int applicationPortNumber;    // static
 
     private static Thread threadHealthCheck;
 
@@ -120,9 +120,9 @@ public class EurekaService implements EurekaApi {
                 "}";
 
         instanceId = String.format("%s:%s:%d", this.createCrazyString(10), applicationName, portNumber);
-        EurekaService.applicationName = applicationName;
-        EurekaService.healthCheckUrl = healthCheckUrl;
-        EurekaService.applicationPortNumber = portNumber;
+        this.applicationName = applicationName;       // EurekaService.
+        this.healthCheckUrl = healthCheckUrl;         // EurekaService.
+        this.applicationPortNumber = portNumber;      // EurekaService.
 
         String requestBody = String.format(
                 requestThemplate,
@@ -215,7 +215,7 @@ public class EurekaService implements EurekaApi {
 
     @Override
     public void unregisterThisService() throws IOException {
-        this.unregisterServiceFromEurekaService(EurekaService.applicationName, instanceId);
+        this.unregisterServiceFromEurekaService(this.applicationName, instanceId); // EurekaService.
     }
 
     private String addRequestParameterToUrl(String url, Map<String, String> parameters){

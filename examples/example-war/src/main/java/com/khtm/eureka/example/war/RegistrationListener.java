@@ -40,7 +40,7 @@ public class RegistrationListener implements ServletContextListener {
     @Override
     public void contextDestroyed(ServletContextEvent servletContextEvent) {
         try {
-            eurekaService.unregisterServiceFromEurekaService(applicationName, EurekaService.instanceId);
+            eurekaService.unregisterServiceFromEurekaService(applicationName, eurekaService.instanceId);
         } catch (IOException e) {
             e.printStackTrace();
         }
